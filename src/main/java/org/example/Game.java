@@ -58,13 +58,12 @@ public class Game {
         length = 4;
         direction = "RIGHT";
 
-        snake[0] = new SnakeCell(width / 2, height / 2);
-        snake[1] = new SnakeCell(width / 2, height / 2);
-        snake[2] = new SnakeCell(width / 2, height / 2);
-        snake[3] = new SnakeCell(width / 2, height / 2);
+        for(int i=0;i<length;i++) {
+            snake[i] = new SnakeCell(width / 2, height / 2);
+        }
 
-        food[0] = (int) (Math.random() * (width - 4) + 3);
-        food[1] = (int) (Math.random() * (height - 4) + 3);
+        food[0] = (int) (Math.random() * (width - 2) + 1);
+        food[1] = (int) (Math.random() * (height - 2) + 1);
     }
 
     public void moveSnake() {
@@ -76,7 +75,7 @@ public class Game {
             direction = "LEFT";
         if (Objects.equals(keyInput.getKeyBoardKey(), "RIGHT") && !Objects.equals(direction, "LEFT"))
             direction = "RIGHT";
-        for (int i = length - 1; i >= 1; i = i - 1) {
+        for (int i = length - 1; i >= 1; i--) {
             snake[i].x = snake[i - 1].x;
             snake[i].y = snake[i - 1].y;
         }
@@ -104,8 +103,8 @@ public class Game {
         }
         if (snake[0].x == food[0] && snake[0].y == food[1]) {
             snake[length] = new SnakeCell(0, 0);
-            food[0] = (int) (Math.random() * (width - 4) + 3);
-            food[1] = (int) (Math.random() * (height - 4) + 3);
+            food[0] = (int) (Math.random() * (width - 2) + 1);
+            food[1] = (int) (Math.random() * (height - 2) + 1);
             length++;
         }
         if (doesHeadTouchBody()) {
